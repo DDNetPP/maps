@@ -24,6 +24,9 @@ jobs:
           ./edit_map master_BlmapChill.map master --MapDir
           ./edit_map BlmapChill.map new --MapDir
           cd master || exit 1
-          git init && git add . && git commit -m "init"
+          git init
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
+          git add . && git commit -m "init"
           mv -r ../new/* .
           git --no-pager diff
