@@ -33,4 +33,4 @@ jobs:
           rsync -a -r ../new/* .
 
       - name: Show diff
-        run: git --no-pager diff
+        run: cd master && git --no-pager diff
