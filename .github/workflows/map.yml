@@ -22,8 +22,8 @@ jobs:
 
       - name: Prepare maps
         run: |
-          ./edit_map master_BlmapChill.map master --MapDir
-          ./edit_map BlmapChill.map new --MapDir
+          ./edit_map master_BlmapChill.map master --mapdir
+          ./edit_map BlmapChill.map new --mapdir
           cd master || exit 1
           git init
           git config --global user.email "you@example.com"
