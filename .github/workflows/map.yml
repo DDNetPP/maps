@@ -12,19 +12,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
 
       - name: Setup
         run: |
-          # git log -2 --pretty=format:"%H"
-          # old_commit="$(git log -2 --pretty=format:"%H" | tail -n1)"
-          # wget -O ../BlmapChill.map "https://github.com/DDNetPP/maps/raw/$old_commit/BlmapChill.map"
-          # wget -O ../edit_map https://zillyhuhn.com/tmp/edit_map && chmod +x ../edit_map
+          old_commit="$(git log -2 --pretty=format:"%H" | tail -n1)"
+          wget -O ../BlmapChill.map "https://github.com/DDNetPP/maps/raw/$old_commit/BlmapChill.map"
+          wget -O ../edit_map https://zillyhuhn.com/tmp/edit_map && chmod +x ../edit_map
 
       - name: Prepare maps
         run: |
-          git log -n3 --pretty=format:"%H"
-          git log
-          exit 0
           current_commit="$(git rev-parse HEAD)"
           old_commit="$(git log -2 --pretty=format:"%H" | tail -n1)"
           echo "curr: $current_commit old: $old_commit"
