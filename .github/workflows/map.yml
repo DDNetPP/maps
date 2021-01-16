@@ -23,10 +23,6 @@ jobs:
 
       - name: Prepare maps
         run: |
-          current_commit="$(git rev-parse HEAD)"
-          old_commit="$(git log -3 --pretty=format:"%H" | tail -n1)"
-          echo "curr: $current_commit old: $old_commit"
-          git status
           ../edit_map ../BlmapChill.map old --mapdir
           ../edit_map BlmapChill.map new --mapdir
           cd old || exit 1
