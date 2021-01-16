@@ -22,6 +22,7 @@ jobs:
 
       - name: Prepare maps
         run: |
+          git log -2 --pretty=format:"%H"
           current_commit="$(git rev-parse HEAD)"
           old_commit="$(git log -2 --pretty=format:"%H" | tail -n1)"
           echo "curr: $current_commit old: $old_commit"
