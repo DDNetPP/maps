@@ -20,12 +20,14 @@ jobs:
 
       - name: Prepare maps
         run: |
-          pwd
           git status
-          ls
-          git reset --hard HEAD^
+          current_commit="$(git rev-parse HEAD)"
+          old_commit="$(git log -2 --pretty=format:"%H" | tail -n1)"
+          git checkout "$old_commit"
+          git status
           cp BlmapChill.map ..
-          git reset --hard origin/master
+          git checkout "$current_commit"
+          git status
           ../edit_map ../BlmapChill.map old --mapdir
           ../edit_map BlmapChill.map new --mapdir
           cd old || exit 1
