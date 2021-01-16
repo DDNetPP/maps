@@ -45,7 +45,6 @@ jobs:
       - name: Diff master
         run: |
           ../edit_map ../master.map master --mapdir
-          ../edit_map BlmapChill.map new --mapdir
           cd master || exit 1
           {
             git config --global init.defaultBranch main
