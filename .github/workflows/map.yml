@@ -20,9 +20,12 @@ jobs:
 
       - name: Prepare maps
         run: |
-          ./edit_map master_BlmapChill.map master --mapdir
+          git reset --hard HEAD^
+          cp BlmapChill.map ..
+          git reset --hard origin/master
+          ./edit_map ../BlmapChill.map old --mapdir
           ./edit_map BlmapChill.map new --mapdir
-          cd master || exit 1
+          cd old || exit 1
           {
             git config --global init.defaultBranch main
             git init
@@ -36,4 +39,4 @@ jobs:
           git --no-pager diff
 
       - name: Show status
-        run: cd master && git status
+        run: cd old && git status
