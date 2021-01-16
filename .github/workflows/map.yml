@@ -25,6 +25,10 @@ jobs:
           old_commit="$(git log -2 --pretty=format:"%H" | tail -n1)"
           echo "curr: $current_commit old: $old_commit"
           git status
+          echo "-- ls"
+          ls
+          echo "-- ls .."
+          ls ..
           ../edit_map ../BlmapChill.map old --mapdir
           ../edit_map BlmapChill.map new --mapdir
           cd old || exit 1
