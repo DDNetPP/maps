@@ -15,7 +15,6 @@ jobs:
 
       - name: Setup
         run: |
-          wget -O master_BlmapChill.map https://github.com/DDNetPP/maps/raw/master/BlmapChill.map
           wget -O ../edit_map https://zillyhuhn.com/tmp/edit_map && chmod +x ../edit_map
 
       - name: Prepare maps
