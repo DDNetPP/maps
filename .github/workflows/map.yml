@@ -20,6 +20,9 @@ jobs:
 
       - name: Prepare maps
         run: |
+          pwd
+          git status
+          ls
           git reset --hard HEAD^
           cp BlmapChill.map ..
           git reset --hard origin/master
