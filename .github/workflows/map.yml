@@ -44,7 +44,7 @@ jobs:
       - name: Preview diff prev commit
         run: |
           cd old
-          TERM=screen-256color ../diff.sh 155 50 --buffer
+          TERM=screen-256color ../../diff.sh 155 50 --buffer
 
       - name: Status prev commit
         run: cd old && git status
@@ -68,7 +68,7 @@ jobs:
       - name: Preview diff master
         run: |
           cd old
-          TERM=screen-256color ../diff.sh 155 50 --buffer
+          TERM=screen-256color ../../diff.sh 155 50 --buffer
 
       - name: Status master
         run: cd old && git status
