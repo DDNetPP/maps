@@ -21,7 +21,7 @@ jobs:
           wget -O ../master.map https://github.com/DDNetPP/maps/raw/master/BlmapChill.map
           wget -O ../old.map "https://github.com/DDNetPP/maps/raw/$old_commit/BlmapChill.map"
           wget -O ../edit_map https://zillyhuhn.com/tmp/edit_map && chmod +x ../edit_map
-          wget -O ../diff.sh https://raw.githubusercontent.com/lib-crash/lib-teeworlds/master/mapdir_git_diff.sh
+          wget -O ../diff.sh https://raw.githubusercontent.com/lib-crash/lib-teeworlds/ffd36e74cc55dfd6f49ab08122d4a09a6a090ead/misc/mapdir_git_diff.sh
           chmod +x ../diff.sh
 
       - name: Diff prev commit
