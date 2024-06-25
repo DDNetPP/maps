@@ -9,11 +9,18 @@ on:
 jobs:
   BlmapChill:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11"]
 
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
 
       - name: Setup
         run: |
@@ -24,6 +31,27 @@ jobs:
           chmod +x ../twmap-edit
           wget -O ../diff.sh https://raw.githubusercontent.com/lib-crash/lib-teeworlds/ffd36e74cc55dfd6f49ab08122d4a09a6a090ead/misc/mapdir_git_diff.sh
           chmod +x ../diff.sh
+
+          python -m pip install --upgrade pip
+          pip install twmap
+          pip install numpy
+          git clone https://github.com/DDNetPP/maps-scripts ~/scripts
+
+      - name: Check BlmpaChill version bump
+        run: |
+          old="$(python ~/scripts/BlmapChill/print_version.py ../old.map)"
+          new="$(python ~/scripts/BlmapChill/print_version.py BlmapChill.map)"
+          expected="$((old+1))"
+          printf 'old      version '%s'\n' "$old"
+          printf 'expected version '%s'\n' "$expected"
+          printf 'new      version '%s'\n' "$new"
+          if [ "$new" != "$expected" ]
+          then
+            printf 'WRONG VERSION NUMBER IN THE TOP LEFT!\n'
+            printf '  expected: '%s'\n' "$expected"
+            printf '       got: '%s'\n' "$new"
+            exit 1
+          fi
 
       - name: Diff prev commit
         run: |
