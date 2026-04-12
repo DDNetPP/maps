@@ -27,8 +27,7 @@ jobs:
           old_commit="$(git log -3 --pretty=format:"%H" | tail -n1)"
           wget -O ../master.map https://github.com/DDNetPP/maps/raw/master/blmapV3multistarbox.map
           wget -O ../old.map "https://github.com/DDNetPP/maps/raw/$old_commit/blmapV3multistarbox.map"
-          wget -O ../twmap-edit https://zillyhuhn.com/tmp/twmap-edit && chmod +x ../twmap-edit
-          chmod +x ../twmap-edit
+          cargo install twmap-tools
           wget -O ../diff.sh https://raw.githubusercontent.com/lib-crash/lib-teeworlds/ffd36e74cc55dfd6f49ab08122d4a09a6a090ead/misc/mapdir_git_diff.sh
           chmod +x ../diff.sh
 
@@ -39,8 +38,8 @@ jobs:
 
       - name: Diff prev commit
         run: |
-          ../twmap-edit ../old.map old --mapdir
-          ../twmap-edit blmapV3multistarbox.map new --mapdir
+          twmap-edit ../old.map old --mapdir
+          twmap-edit blmapV3multistarbox.map new --mapdir
           cd old || exit 1
           {
             git config --global init.defaultBranch main
@@ -64,7 +63,7 @@ jobs:
 
       - name: Diff master
         run: |
-          ../twmap-edit ../master.map master --mapdir
+          twmap-edit ../master.map master --mapdir
           cd master || exit 1
           {
             git config --global init.defaultBranch main
