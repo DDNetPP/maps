@@ -33,22 +33,6 @@ jobs:
           pip install numpy
           git clone https://github.com/DDNetPP/maps-scripts ~/scripts
 
-      - name: Check BlmpaChill version bump
-        run: |
-          old="$(python ~/scripts/BlmapChill/print_version.py ../old.map)"
-          new="$(python ~/scripts/BlmapChill/print_version.py BlmapChill.map)"
-          expected="$((old+1))"
-          printf 'old      version '%s'\n' "$old"
-          printf 'expected version '%s'\n' "$expected"
-          printf 'new      version '%s'\n' "$new"
-          if [ "$new" != "$expected" ]
-          then
-            printf 'WRONG VERSION NUMBER IN THE TOP LEFT!\n'
-            printf '  expected: '%s'\n' "$expected"
-            printf '       got: '%s'\n' "$new"
-            exit 1
-          fi
-
       - name: Diff prev commit
         run: |
           twmap-edit ../old.map old --mapdir
@@ -97,3 +81,35 @@ jobs:
 
       - name: Status master
         run: cd old && git status
+
+      - name: Check BlmpaChill version bump (top left)
+        run: |
+          old="$(python ~/scripts/BlmapChill/print_version.py ../old.map)"
+          new="$(python ~/scripts/BlmapChill/print_version.py BlmapChill.map)"
+          expected="$((old+1))"
+          printf 'old      version '%s'\n' "$old"
+          printf 'expected version '%s'\n' "$expected"
+          printf 'new      version '%s'\n' "$new"
+          if [ "$new" != "$expected" ]
+          then
+            printf 'WRONG VERSION NUMBER IN THE TOP LEFT!\n'
+            printf '  expected: '%s'\n' "$expected"
+            printf '       got: '%s'\n' "$new"
+            exit 1
+          fi
+
+      - name: Check BlmpaChill version bump (map details)
+        run: |
+          old="$(python ~/scripts/BlmapChill/print_map_details_version.py ../old.map)"
+          new="$(python ~/scripts/BlmapChill/print_map_details_version.py BlmapChill.map)"
+          expected="$((old+1))"
+          printf 'old      version '%s'\n' "$old"
+          printf 'expected version '%s'\n' "$expected"
+          printf 'new      version '%s'\n' "$new"
+          if [ "$new" != "$expected" ]
+          then
+            printf 'WRONG VERSION NUMBER IN THE MAP DETAILS!\n'
+            printf '  expected: '%s'\n' "$expected"
+            printf '       got: '%s'\n' "$new"
+            exit 1
+          fi
