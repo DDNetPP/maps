@@ -25,7 +25,7 @@ jobs:
           old_commit="$(git log -3 --pretty=format:"%H" | tail -n1)"
           wget -O ../master.map https://github.com/DDNetPP/maps/raw/master/BlmapChill.map
           wget -O ../old.map "https://github.com/DDNetPP/maps/raw/$old_commit/BlmapChill.map"
-          wget -O ../diff.sh https://raw.githubusercontent.com/lib-crash/lib-teeworlds/ffd36e74cc55dfd6f49ab08122d4a09a6a090ead/misc/mapdir_git_diff.sh
+          wget -O ../diff.sh https://raw.githubusercontent.com/lib-crash/lib-teeworlds/170ff14e4f368478077a5b210aa9769e2a7fb3be/misc/mapdir_git_diff.sh
           chmod +x ../diff.sh
           cargo install twmap-tools
           python -m pip install --upgrade pip
@@ -53,7 +53,7 @@ jobs:
       - name: Preview diff prev commit
         run: |
           cd old
-          TERM=screen-256color ../../diff.sh 155 50 --buffer
+          TERM=screen-256color ../../diff.sh 155 50
 
       - name: Status prev commit
         run: cd old && git status
@@ -77,7 +77,7 @@ jobs:
       - name: Preview diff master
         run: |
           cd old
-          TERM=screen-256color ../../diff.sh 155 50 --buffer
+          TERM=screen-256color ../../diff.sh 155 50
 
       - name: Status master
         run: cd old && git status
